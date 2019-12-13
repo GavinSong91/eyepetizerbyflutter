@@ -21,4 +21,6 @@ class ResImage {
   static final String account = 'assets/images/ic_account_login_user_name.png';
   static final String pwd = 'assets/images/ic_account_login_password.png';
   static final String gavin_avatar = 'assets/images/avatar.jpg';
+  static final String unlogintip = 'assets/images/no_account_tip.png';
+  static final String clear_btn = 'assets/images/ic_action_cancel_grey.png';
 }

@@ -14,4 +14,5 @@ class ResString{
   static final String my_badge = '我的徽章';
   static final String feedback = '意见反馈';
   static final String contribute = '我要投稿';
+  static final String cancel = '取消';
 }

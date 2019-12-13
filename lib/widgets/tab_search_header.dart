@@ -3,21 +3,26 @@ import 'package:eyepetizer/res/res_color.dart';
 import 'package:eyepetizer/widgets/tab_indictor.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
+import 'animation_pageroute.dart';
+
 class TabSearchHeader extends StatelessWidget {
+  int initialIndex;
   List<Widget> pageWidget;
   List<Widget> tabWidget;
 
   TabSearchHeader(
-      {Key key, @required this.pageWidget, @required this.tabWidget})
+      {Key key,
+      this.initialIndex,
+      @required this.pageWidget,
+      @required this.tabWidget})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: initialIndex,
       length: tabWidget.length,
       child: Scaffold(
-        backgroundColor: ResColor.grey50,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: ResColor.grey50,
@@ -30,17 +35,22 @@ class TabSearchHeader extends StatelessWidget {
                   alignment: Alignment.center,
                   child: TabBar(
                     //设置tab选中和未选中的属性
-                      indicator: TabIndictor(),
-                      labelColor: Colors.black,
-                      labelStyle: TextStyle(
-                          fontSize: 12.0, fontWeight: FontWeight.bold),
-                      unselectedLabelColor: ResColor.tabUnSelect,
-                      unselectedLabelStyle: TextStyle(
-                          fontSize: 12.0, fontWeight: FontWeight.bold),
-                      indicatorColor: ResColor.tabSelect,
-                      //tab点击事件
-                      onTap: (index) => {},
-                      tabs: tabWidget),
+                    indicator: TabIndictor(),
+                    labelColor: Colors.black,
+                    labelStyle: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: 'LanTing',
+                        fontWeight: FontWeight.bold),
+                    unselectedLabelColor: ResColor.tabUnSelect,
+                    unselectedLabelStyle: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: 'LanTing',
+                        fontWeight: FontWeight.bold),
+                    indicatorColor: ResColor.tabSelect,
+                    //tab点击事件
+                    onTap: (index) => {},
+                    tabs: tabWidget,
+                  ),
                 ),
               ),
               Align(
@@ -49,9 +59,10 @@ class TabSearchHeader extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     icon: Icon(Icons.search, color: Colors.black),
                     onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                SearchPage()))),
+                        AnimationPageRoute(
+                            slideTween: Tween(
+                                begin: Offset(0.0, -1.0), end: Offset.zero),
+                            builder: (BuildContext context) => SearchPage()))),
               )
             ],
           ),
@@ -64,6 +75,6 @@ class TabSearchHeader extends StatelessWidget {
         ),
         body: TabBarView(children: pageWidget),
       ),
-    );;
+    );
   }
 }

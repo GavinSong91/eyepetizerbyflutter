@@ -51,6 +51,39 @@ class PublishAddPage extends StatelessWidget {
                 ],
               ),
             ),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 30.0),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Text(
+                          'Daily appetizers for your eyes. Bon eyepetit.',
+                          style: TextStyle(
+                            color: ResColor.white,
+                            fontSize: 14.0,
+                            decoration: TextDecoration.none,
+                            fontWeight: FontWeight.w100,
+                            fontFamily: 'Lobster',
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '每日精选视频推介，让你大开眼界',
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          color: ResColor.white,
+                          fontWeight: FontWeight.w100,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
