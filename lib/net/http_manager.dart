@@ -6,7 +6,6 @@ import 'http_code.dart';
 import 'http_data.dart';
 import 'interceptors/error_interceptors.dart';
 import 'interceptors/header_interceptor.dart';
-import 'interceptors/response_interceptors.dart';
 
 class HttpManager {
   Dio _dio = new Dio();
@@ -44,13 +43,13 @@ class HttpManager {
       if (e.response != null) {
         errorResponse = e.response;
       } else {
-        errorResponse = new Response(statusCode: 666);
+        errorResponse = Response(statusCode: 666);
       }
       if (e.type == DioErrorType.CONNECT_TIMEOUT ||
           e.type == DioErrorType.RECEIVE_TIMEOUT) {
         errorResponse.statusCode = HttpCode.NETWORK_TIMEOUT;
       }
-      return new HttpData(errorResponse.statusCode, e.message, '');
+      return HttpData(errorResponse.statusCode, e.message, '');
     }
 
     Response response;
@@ -62,8 +61,8 @@ class HttpManager {
     if (response.data is DioError) {
       return resultError(response.data);
     }
-    return response.data;
+    print("response==========${response}");
+    return HttpData(HttpCode.SUCCESS, '请求成功', response.data);
   }
 }
-
 final HttpManager httpManager = new HttpManager();

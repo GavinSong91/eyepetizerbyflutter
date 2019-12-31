@@ -23,4 +23,8 @@ class ResImage {
   static final String gavin_avatar = 'assets/images/avatar.jpg';
   static final String unlogintip = 'assets/images/no_account_tip.png';
   static final String clear_btn = 'assets/images/ic_action_cancel_grey.png';
+  static final String theme_creation_square = 'assets/images/recommend_liked.jpg';
+  static final String topic_discussion_hall = 'assets/images/recommend_unlike.jpg';
+  static final String launcher = 'assets/images/ic_launcher.png';
+  static final String next = 'assets/images/ic_action_next_grey.png';
 }

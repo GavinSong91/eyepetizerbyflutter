@@ -96,7 +96,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         onTap: (int index) {
           setState(() {
             if (index == 2) {
-              print("index$index");
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => PublishAddPage()));
             } else {
@@ -114,7 +113,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
       case 0:
         return HomePage();
       case 1:
-        return CommuntiyPage();
+        return  CommuntiyPage();
       case 3:
         return NotifyPage();
       case 4:

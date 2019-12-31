@@ -1,4 +1,4 @@
-import 'package:eyepetizer/page/home/recommend_page.dart';
+import 'package:eyepetizer/page/notify/push_message_page.dart';
 import 'package:eyepetizer/page/notify/unlogin_page.dart';
 import 'package:eyepetizer/res/res_string.dart';
 import 'package:eyepetizer/widgets/tab_search_header.dart';
@@ -8,8 +8,9 @@ class NotifyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabSearchHeader(
+      initialIndex: 0,
       pageWidget: <Widget>[
-        RecommendPage(),
+        PushMessagePage(),
         unLogingPage(),
         unLogingPage(),
       ],
