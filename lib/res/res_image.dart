@@ -27,4 +27,5 @@ class ResImage {
   static final String topic_discussion_hall = 'assets/images/recommend_unlike.jpg';
   static final String launcher = 'assets/images/ic_launcher.png';
   static final String next = 'assets/images/ic_action_next_grey.png';
+  static final String loading = 'assets/images/eye_loading_progress.png';
 }

@@ -1,46 +1,14 @@
-class CommuntiyRecommendEntity {
-	bool adExist;
-	int total;
-	String nextPageUrl;
-	int count;
-	List<CommuntiyRecommandItemlist> itemList;
-
-	CommuntiyRecommendEntity({this.adExist, this.total, this.nextPageUrl, this.count, this.itemList});
-
-	CommuntiyRecommendEntity.fromJson(Map<String, dynamic> json) {
-		adExist = json['adExist'];
-		total = json['total'];
-		nextPageUrl = json['nextPageUrl'];
-		count = json['count'];
-		if (json['itemList'] != null) {
-			itemList = new List<CommuntiyRecommandItemlist>();(json['itemList'] as List).forEach((v) { itemList.add(new CommuntiyRecommandItemlist.fromJson(v)); });
-		}
-	}
-
-	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		data['adExist'] = this.adExist;
-		data['total'] = this.total;
-		data['nextPageUrl'] = this.nextPageUrl;
-		data['count'] = this.count;
-		if (this.itemList != null) {
-      data['itemList'] =  this.itemList.map((v) => v.toJson()).toList();
-    }
-		return data;
-	}
-}
-
-class CommuntiyRecommandItemlist {
-	CommuntiyRecommendItemlistData data;
+class ItemlistEntity {
+	ItemlistData data;
 	int adIndex;
 	dynamic tag;
 	int id;
 	String type;
 
-	CommuntiyRecommandItemlist({this.data, this.adIndex, this.tag, this.id, this.type});
+	ItemlistEntity({this.data, this.adIndex, this.tag, this.id, this.type});
 
-	CommuntiyRecommandItemlist.fromJson(Map<String, dynamic> json) {
-		data = json['data'] != null ? new CommuntiyRecommendItemlistData.fromJson(json['data']) : null;
+	ItemlistEntity.fromJson(Map<String, dynamic> json) {
+		data = json['data'] != null ? new ItemlistData.fromJson(json['data']) : null;
 		adIndex = json['adIndex'];
 		tag = json['tag'];
 		id = json['id'];
@@ -60,18 +28,18 @@ class CommuntiyRecommandItemlist {
 	}
 }
 
-class CommuntiyRecommendItemlistData {
+class ItemlistData {
 	String dataType;
-	CommuntiyRecommendItemlistDataHeader header;
-	CommuntiyRecommendItemlistDataContent content;
+	ItemlistDataHeader header;
+	ItemlistDataContent content;
 	dynamic adTrack;
 
-	CommuntiyRecommendItemlistData({this.dataType, this.header, this.content, this.adTrack});
+	ItemlistData({this.dataType, this.header, this.content, this.adTrack});
 
-	CommuntiyRecommendItemlistData.fromJson(Map<String, dynamic> json) {
+	ItemlistData.fromJson(Map<String, dynamic> json) {
 		dataType = json['dataType'];
-		header = json['header'] != null ? new CommuntiyRecommendItemlistDataHeader.fromJson(json['header']) : null;
-		content = json['content'] != null ? new CommuntiyRecommendItemlistDataContent.fromJson(json['content']) : null;
+		header = json['header'] != null ? new ItemlistDataHeader.fromJson(json['header']) : null;
+		content = json['content'] != null ? new ItemlistDataContent.fromJson(json['content']) : null;
 		adTrack = json['adTrack'];
 	}
 
@@ -89,7 +57,7 @@ class CommuntiyRecommendItemlistData {
 	}
 }
 
-class CommuntiyRecommendItemlistDataHeader {
+class ItemlistDataHeader {
 	dynamic labelList;
 	int tagId;
 	String followType;
@@ -103,9 +71,9 @@ class CommuntiyRecommendItemlistDataHeader {
 	dynamic tagName;
 	bool topShow;
 
-	CommuntiyRecommendItemlistDataHeader({this.labelList, this.tagId, this.followType, this.issuerName, this.iconType, this.actionUrl, this.icon, this.showHateVideo, this.id, this.time, this.tagName, this.topShow});
+	ItemlistDataHeader({this.labelList, this.tagId, this.followType, this.issuerName, this.iconType, this.actionUrl, this.icon, this.showHateVideo, this.id, this.time, this.tagName, this.topShow});
 
-	CommuntiyRecommendItemlistDataHeader.fromJson(Map<String, dynamic> json) {
+	ItemlistDataHeader.fromJson(Map<String, dynamic> json) {
 		labelList = json['labelList'];
 		tagId = json['tagId'];
 		followType = json['followType'];
@@ -138,17 +106,17 @@ class CommuntiyRecommendItemlistDataHeader {
 	}
 }
 
-class CommuntiyRecommendItemlistDataContent {
-	CommuntiyRecommendItemlistDataContentData data;
+class ItemlistDataContent {
+	ItemlistDataContentData data;
 	int adIndex;
 	dynamic tag;
 	int id;
 	String type;
 
-	CommuntiyRecommendItemlistDataContent({this.data, this.adIndex, this.tag, this.id, this.type});
+	ItemlistDataContent({this.data, this.adIndex, this.tag, this.id, this.type});
 
-	CommuntiyRecommendItemlistDataContent.fromJson(Map<String, dynamic> json) {
-		data = json['data'] != null ? new CommuntiyRecommendItemlistDataContentData.fromJson(json['data']) : null;
+	ItemlistDataContent.fromJson(Map<String, dynamic> json) {
+		data = json['data'] != null ? new ItemlistDataContentData.fromJson(json['data']) : null;
 		adIndex = json['adIndex'];
 		tag = json['tag'];
 		id = json['id'];
@@ -168,45 +136,45 @@ class CommuntiyRecommendItemlistDataContent {
 	}
 }
 
-class CommuntiyRecommendItemlistDataContentData {
+class ItemlistDataContentData {
 	int releaseTime;
 	String city;
-	int latitude;
+	double latitude;
 	String description;
 	bool collected;
 	String title;
 	bool addWatermark;
-	CommuntiyRecommendItemlistDataContentDataCover cover;
+	ItemlistDataContentDataCover cover;
 	int uid;
 	String checkStatus;
 	List<String> urls;
 	String xLibrary;
 	int id;
 	String validateResult;
-	int longitude;
+	double longitude;
 	int height;
-	CommuntiyRecommendItemlistDataContentDataOwner owner;
+	ItemlistDataContentDataOwner owner;
 	String area;
 	dynamic selectedTime;
 	List<String> urlsWithWatermark;
 	String validateStatus;
 	String dataType;
 	bool ifMock;
-	CommuntiyRecommendItemlistDataContentDataConsumption consumption;
+	ItemlistDataContentDataConsumption consumption;
 	int updateTime;
 	bool reallyCollected;
 	String url;
-	List<CommuntiyRecommandItemlistDataContentDataTags> tags;
+	List<ItemlistDataContentDataTag> tags;
 	int createTime;
 	dynamic recentOnceReply;
 	dynamic privateMessageActionUrl;
 	int width;
 	String resourceType;
-	int status;
+	dynamic status;
 
-	CommuntiyRecommendItemlistDataContentData({this.releaseTime, this.city, this.latitude, this.description, this.collected, this.title, this.addWatermark, this.cover, this.uid, this.checkStatus, this.urls, this.xLibrary, this.id, this.validateResult, this.longitude, this.height, this.owner, this.area, this.selectedTime, this.urlsWithWatermark, this.validateStatus, this.dataType, this.ifMock, this.consumption, this.updateTime, this.reallyCollected, this.url, this.tags, this.createTime, this.recentOnceReply, this.privateMessageActionUrl, this.width, this.resourceType, this.status});
+	ItemlistDataContentData({this.releaseTime, this.city, this.latitude, this.description, this.collected, this.title, this.addWatermark, this.cover, this.uid, this.checkStatus, this.urls, this.xLibrary, this.id, this.validateResult, this.longitude, this.height, this.owner, this.area, this.selectedTime, this.urlsWithWatermark, this.validateStatus, this.dataType, this.ifMock, this.consumption, this.updateTime, this.reallyCollected, this.url, this.tags, this.createTime, this.recentOnceReply, this.privateMessageActionUrl, this.width, this.resourceType, this.status});
 
-	CommuntiyRecommendItemlistDataContentData.fromJson(Map<String, dynamic> json) {
+	ItemlistDataContentData.fromJson(Map<String, dynamic> json) {
 		releaseTime = json['releaseTime'];
 		city = json['city'];
 		latitude = json['latitude'];
@@ -214,7 +182,7 @@ class CommuntiyRecommendItemlistDataContentData {
 		collected = json['collected'];
 		title = json['title'];
 		addWatermark = json['addWatermark'];
-		cover = json['cover'] != null ? new CommuntiyRecommendItemlistDataContentDataCover.fromJson(json['cover']) : null;
+		cover = json['cover'] != null ? new ItemlistDataContentDataCover.fromJson(json['cover']) : null;
 		uid = json['uid'];
 		checkStatus = json['checkStatus'];
 		urls = json['urls']?.cast<String>();
@@ -223,19 +191,19 @@ class CommuntiyRecommendItemlistDataContentData {
 		validateResult = json['validateResult'];
 		longitude = json['longitude'];
 		height = json['height'];
-		owner = json['owner'] != null ? new CommuntiyRecommendItemlistDataContentDataOwner.fromJson(json['owner']) : null;
+		owner = json['owner'] != null ? new ItemlistDataContentDataOwner.fromJson(json['owner']) : null;
 		area = json['area'];
 		selectedTime = json['selectedTime'];
 		urlsWithWatermark = json['urlsWithWatermark']?.cast<String>();
 		validateStatus = json['validateStatus'];
 		dataType = json['dataType'];
 		ifMock = json['ifMock'];
-		consumption = json['consumption'] != null ? new CommuntiyRecommendItemlistDataContentDataConsumption.fromJson(json['consumption']) : null;
+		consumption = json['consumption'] != null ? new ItemlistDataContentDataConsumption.fromJson(json['consumption']) : null;
 		updateTime = json['updateTime'];
 		reallyCollected = json['reallyCollected'];
 		url = json['url'];
 		if (json['tags'] != null) {
-			tags = new List<CommuntiyRecommandItemlistDataContentDataTags>();(json['tags'] as List).forEach((v) { tags.add(new CommuntiyRecommandItemlistDataContentDataTags.fromJson(v)); });
+			tags = new List<ItemlistDataContentDataTag>();(json['tags'] as List).forEach((v) { tags.add(new ItemlistDataContentDataTag.fromJson(v)); });
 		}
 		createTime = json['createTime'];
 		recentOnceReply = json['recentOnceReply'];
@@ -293,16 +261,16 @@ class CommuntiyRecommendItemlistDataContentData {
 	}
 }
 
-class CommuntiyRecommendItemlistDataContentDataCover {
+class ItemlistDataContentDataCover {
 	String feed;
 	String detail;
 	dynamic sharing;
 	dynamic blurred;
 	dynamic homepage;
 
-	CommuntiyRecommendItemlistDataContentDataCover({this.feed, this.detail, this.sharing, this.blurred, this.homepage});
+	ItemlistDataContentDataCover({this.feed, this.detail, this.sharing, this.blurred, this.homepage});
 
-	CommuntiyRecommendItemlistDataContentDataCover.fromJson(Map<String, dynamic> json) {
+	ItemlistDataContentDataCover.fromJson(Map<String, dynamic> json) {
 		feed = json['feed'];
 		detail = json['detail'];
 		sharing = json['sharing'];
@@ -321,7 +289,7 @@ class CommuntiyRecommendItemlistDataContentDataCover {
 	}
 }
 
-class CommuntiyRecommendItemlistDataContentDataOwner {
+class ItemlistDataContentDataOwner {
 	dynamic area;
 	dynamic birthday;
 	dynamic country;
@@ -344,9 +312,9 @@ class CommuntiyRecommendItemlistDataContentDataOwner {
 	dynamic job;
 	int registDate;
 
-	CommuntiyRecommendItemlistDataContentDataOwner({this.area, this.birthday, this.country, this.expert, this.limitVideoOpen, this.gender, this.releaseDate, this.city, this.university, this.actionUrl, this.description, this.avatar, this.followed, this.cover, this.uid, this.xLibrary, this.nickname, this.ifPgc, this.userType, this.job, this.registDate});
+	ItemlistDataContentDataOwner({this.area, this.birthday, this.country, this.expert, this.limitVideoOpen, this.gender, this.releaseDate, this.city, this.university, this.actionUrl, this.description, this.avatar, this.followed, this.cover, this.uid, this.xLibrary, this.nickname, this.ifPgc, this.userType, this.job, this.registDate});
 
-	CommuntiyRecommendItemlistDataContentDataOwner.fromJson(Map<String, dynamic> json) {
+	ItemlistDataContentDataOwner.fromJson(Map<String, dynamic> json) {
 		area = json['area'];
 		birthday = json['birthday'];
 		country = json['country'];
@@ -397,15 +365,15 @@ class CommuntiyRecommendItemlistDataContentDataOwner {
 	}
 }
 
-class CommuntiyRecommendItemlistDataContentDataConsumption {
+class ItemlistDataContentDataConsumption {
 	int shareCount;
 	int replyCount;
 	int realCollectionCount;
 	int collectionCount;
 
-	CommuntiyRecommendItemlistDataContentDataConsumption({this.shareCount, this.replyCount, this.realCollectionCount, this.collectionCount});
+	ItemlistDataContentDataConsumption({this.shareCount, this.replyCount, this.realCollectionCount, this.collectionCount});
 
-	CommuntiyRecommendItemlistDataContentDataConsumption.fromJson(Map<String, dynamic> json) {
+	ItemlistDataContentDataConsumption.fromJson(Map<String, dynamic> json) {
 		shareCount = json['shareCount'];
 		replyCount = json['replyCount'];
 		realCollectionCount = json['realCollectionCount'];
@@ -422,7 +390,7 @@ class CommuntiyRecommendItemlistDataContentDataConsumption {
 	}
 }
 
-class CommuntiyRecommandItemlistDataContentDataTags {
+class ItemlistDataContentDataTag {
 	String actionUrl;
 	dynamic childTagList;
 	String bgPicture;
@@ -438,9 +406,9 @@ class CommuntiyRecommandItemlistDataContentDataTags {
 	String desc;
 	dynamic newestEndTime;
 
-	CommuntiyRecommandItemlistDataContentDataTags({this.actionUrl, this.childTagList, this.bgPicture, this.haveReward, this.childTagIdList, this.tagRecType, this.ifNewest, this.headerImage, this.name, this.communityIndex, this.id, this.adTrack, this.desc, this.newestEndTime});
+	ItemlistDataContentDataTag({this.actionUrl, this.childTagList, this.bgPicture, this.haveReward, this.childTagIdList, this.tagRecType, this.ifNewest, this.headerImage, this.name, this.communityIndex, this.id, this.adTrack, this.desc, this.newestEndTime});
 
-	CommuntiyRecommandItemlistDataContentDataTags.fromJson(Map<String, dynamic> json) {
+	ItemlistDataContentDataTag.fromJson(Map<String, dynamic> json) {
 		actionUrl = json['actionUrl'];
 		childTagList = json['childTagList'];
 		bgPicture = json['bgPicture'];

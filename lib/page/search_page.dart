@@ -1,4 +1,5 @@
 import 'package:eyepetizer/model/search_model.dart';
+import 'package:eyepetizer/net/api_eyepetizer.dart';
 import 'package:eyepetizer/res/res_color.dart';
 import 'package:eyepetizer/res/res_image.dart';
 import 'package:eyepetizer/res/res_string.dart';
@@ -34,6 +35,8 @@ class _SearchPage extends State<SearchPage>
   int _pageState = 0;
   bool _isShowClearbtn = true;
   String _serachContent = "";
+  EyepetizerApi _api;
+  String nextPageUrl;
 
   @override
   void initState() {
@@ -46,6 +49,16 @@ class _SearchPage extends State<SearchPage>
       setState(() {});
     });
     animationController.forward(from: 0.0);
+    _api = EyepetizerApi();
+  }
+
+  void fetchSearch() {
+    _api.doSearchByKeyWord(EyepetizerApi.SearchUrl + _keyWord, (map) {
+      nextPageUrl = map['nextPageUrl'];
+      var entitys = map['entity'];
+      print("entity=>$entitys");
+      entitys.forEach((data) {});
+    });
   }
 
   @override
@@ -135,7 +148,6 @@ class _SearchPage extends State<SearchPage>
         ));
   }
 
-
   Widget _searchbar() {
     return Row(
       children: <Widget>[
@@ -162,7 +174,7 @@ class _SearchPage extends State<SearchPage>
                   color: ResColor.grey400,
                   size: 20.0,
                 ),
-               /* suffixIcon: IconButton(
+                /* suffixIcon: IconButton(
                     icon: Offstage(
                       offstage: _isShowClearbtn,
                       child: Image.asset(
