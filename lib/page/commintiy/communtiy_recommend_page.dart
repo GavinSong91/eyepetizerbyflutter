@@ -28,6 +28,7 @@ class _CommuntiyRecommendPage extends State<CommuntiyRecommendPage> {
   void initState() {
     super.initState();
     _api = EyepetizerApi();
+    _fetchCommuntityRecommend();
   }
 
   void _fetchCommuntityRecommend() {

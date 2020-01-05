@@ -91,7 +91,27 @@ class EyepetizerApi {
   //获取关注默认
   void fetchFollowDatas(RequestCallBack requestCallBack) async {
     var response = await httpManager.fetchNet(
-        'http://baobab.kaiyanapp.com/api/v1/search/?query=过年',
+        'http://baobab.kaiyanapp.com/api/v1/search/?query=搞笑',
+        null,
+        null,
+        null);
+    List<SearchEntity> itemList;
+    if (response != null) {
+      var result = response.result;
+      HttpDatas entity = HttpDatas.fromJson(result);
+      if (entity.itemList != null) {
+        itemList = new List<SearchEntity>();
+        (entity.itemList as List).forEach((v) {
+          itemList.add(new SearchEntity.fromJson(v));
+        });
+      }
+      requestCallBack({'entity': itemList, 'nextPageUrl': entity.nextPageUrl});
+    }
+  }
+
+  void fetchMoreFollowDatas(String nextPageUrl ,RequestCallBack requestCallBack) async {
+    var response = await httpManager.fetchNet(
+        nextPageUrl,
         null,
         null,
         null);

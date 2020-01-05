@@ -18,20 +18,39 @@ class CommuntiyFollowPage extends StatefulWidget {
 
 class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
   EyepetizerApi _api;
-  List<SearchEntity> datas;
+  List<SearchEntity> datas = List();
+
   String nextPageUrl;
 
   @override
   void initState() {
     super.initState();
     _api = EyepetizerApi();
+    _fetchFollowDatas();
+  }
+
+  void _fetchFollowDatas() {
     _api.fetchFollowDatas((map) {
-      datas = map['entity'];
-      nextPageUrl = map['nextPageUrl'];
+      setState(() {
+        datas.clear();
+        datas.addAll(map['entity']);
+        nextPageUrl = map['nextPageUrl'];
+      });
     });
   }
 
-  /* ,*/
+  void _fetchMoreFollowDatas() {
+    if (nextPageUrl.isEmpty) {
+      return;
+    }
+    _api.fetchMoreFollowDatas(nextPageUrl, (map) {
+      setState(() {
+        datas.addAll(map['entity']);
+        nextPageUrl = map['nextPageUrl'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +58,12 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
         header: MaterialHeader(),
         footer: MaterialFooter(),
         child: _followWidget(),
+        onRefresh: () async {
+          _fetchFollowDatas();
+        },
+        onLoad: () async {
+          _fetchMoreFollowDatas();
+        },
       ),
     );
   }
@@ -62,28 +87,76 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, top: 15),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
               ClipOval(
                 child: new Image.network(
                   entity.data.author.icon,
-                  width: 30.0,
+                  width: 40.0,
                 ),
               ),
-              Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(entity.data.author.name),
-                    flex: 1,
-                  ),
-                  Expanded(
-                    child: Text(entity.data.author.description),
-                    flex: 1,
-                  ),
-                ],
+              Padding(padding: EdgeInsets.only(left: 10)),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      entity.data.author.name,
+                      softWrap: false,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'LanTing-Bold',
+                          color: ResColor.tabSelect),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 3)),
+                    RichText(
+                      softWrap: false,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                        text: '发布：',
+                        style: TextStyle(
+                          color: ResColor.grey500,
+                          fontSize: 12,
+                          fontFamily: 'LanTing',
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: entity.data.author.description,
+                              style: TextStyle(
+                                color: ResColor.tabSelect,
+                                fontSize: 12,
+                                fontFamily: 'LanTing',
+                              ))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                flex: 1,
               )
             ],
+          ),
+          Container(
+            padding: EdgeInsets.all(5),
+            child: Text(
+              entity.data.descriptionPgc,
+              softWrap: false,
+              maxLines: 3,
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: ResColor.tabUnSelect,
+                fontSize: 13,
+                fontFamily: 'LanTing',
+              ),
+            ),
           ),
           Card(
             child: ClipRRect(
@@ -95,14 +168,26 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 5, bottom: 5),
+            padding: EdgeInsets.only(top: 10, bottom: 15),
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                      Icon(Icons.collections),
-                      Text(entity.data.consumption.collectionCount.toString())
+                      Padding(padding: EdgeInsets.only(left: 5)),
+                      Icon(
+                        Icons.favorite_border,
+                        color: ResColor.grey500,
+                        size: 18,
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 5)),
+                      Text(
+                        entity.data.consumption.collectionCount.toString(),
+                        style: TextStyle(
+                            color: ResColor.grey500,
+                            fontFamily: 'LanTing',
+                            fontSize: 12),
+                      )
                     ],
                   ),
                   flex: 1,
@@ -110,17 +195,34 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                      Icon(Icons.collections),
-                      Text(entity.data.consumption.collectionCount.toString())
+                      Icon(
+                        Icons.chat,
+                        color: ResColor.grey500,
+                        size: 18,
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 5)),
+                      Text(
+                        entity.data.consumption.realCollectionCount.toString(),
+                        style: TextStyle(
+                            color: ResColor.grey500,
+                            fontFamily: 'LanTing',
+                            fontSize: 12),
+                      )
                     ],
                   ),
                   flex: 1,
                 ),
                 Expanded(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Icons.collections),
-                      Text(entity.data.consumption.collectionCount.toString())
+                      Text(
+                        entity.data.consumption.collectionCount.toString(),
+                        style: TextStyle(
+                            color: ResColor.grey500,
+                            fontFamily: 'LanTing',
+                            fontSize: 12),
+                      ),
                     ],
                   ),
                   flex: 1,
@@ -128,8 +230,14 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
                 Expanded(
                   child: Center(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Icon(Icons.share),
+                        Icon(
+                          Icons.share,
+                          color: ResColor.grey500,
+                          size: 18,
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 5)),
                       ],
                     ),
                   ),
