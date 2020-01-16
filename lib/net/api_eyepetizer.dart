@@ -1,12 +1,13 @@
 import 'package:eyepetizer/model/content_bean_entity.dart';
 import 'package:eyepetizer/model/datas.dart';
 import 'package:eyepetizer/model/http_datas.dart';
+import 'package:eyepetizer/model/response_datas.dart';
 import 'package:eyepetizer/model/search_entity.dart';
 import 'http_manager.dart';
 
 class EyepetizerApi {
   static const String BaseUrl =
-      "https://api.apiopen.top/videoHomeTab/videoCategory";
+      "https://api.apiopen.top/videoHomeTab/videoCategory/videoHomeTab";
 
 //  static const String DailyUrl = "$BaseUrl/todayVideo";
   static const String HomeTabUrl = "$BaseUrl/videoHomeTab";
@@ -24,13 +25,12 @@ class EyepetizerApi {
       "http://baobab.kaiyanapp.com/api/v1/search/?query="; //?num=10&query=xxx&start=10
 
   //获取推荐
-  void fetchRecommendDatas(int page, RequestCallBack requestCallBack) async {
-    var response = await httpManager.fetchNet(
-        "$RecommendUrl?page=$page", null, null, null);
+  void fetchRecommendDatas(RequestCallBack requestCallBack) async {
+    var response = await httpManager.fetchNet(RecommendUrl, null, null, null);
     if (response != null) {
       var result = response.result;
-      ContentBeanEntity entity = ContentBeanEntity.fromJson(result);
-      requestCallBack({'entity': entity});
+      ResponseDatas entity = ResponseDatas.fromJson(result);
+      requestCallBack({'entity': entity.itemList});
     }
   }
 
@@ -39,8 +39,8 @@ class EyepetizerApi {
     var response = await httpManager.fetchNet(DiscoveryUrl, null, null, null);
     if (response != null) {
       var result = response.result;
-      ContentBeanEntity entity = ContentBeanEntity.fromJson(result);
-      requestCallBack({'entity': entity});
+      ResponseDatas entity = ResponseDatas.fromJson(result);
+      requestCallBack({'entity': entity.itemList});
     }
   }
 
@@ -109,12 +109,9 @@ class EyepetizerApi {
     }
   }
 
-  void fetchMoreFollowDatas(String nextPageUrl ,RequestCallBack requestCallBack) async {
-    var response = await httpManager.fetchNet(
-        nextPageUrl,
-        null,
-        null,
-        null);
+  void fetchMoreFollowDatas(
+      String nextPageUrl, RequestCallBack requestCallBack) async {
+    var response = await httpManager.fetchNet(nextPageUrl, null, null, null);
     List<SearchEntity> itemList;
     if (response != null) {
       var result = response.result;

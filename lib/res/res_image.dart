@@ -28,4 +28,5 @@ class ResImage {
   static final String launcher = 'assets/images/ic_launcher.png';
   static final String next = 'assets/images/ic_action_next_grey.png';
   static final String loading = 'assets/images/eye_loading_progress.png';
+  static final String share = 'assets/images/ic_action_share_grey.png';
 }

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:eyepetizer/common/eyepetizer_constants.dart';
 import 'package:eyepetizer/net/api_eyepetizer.dart';
 import 'package:eyepetizer/res/res_color.dart';
 import 'package:eyepetizer/res/res_image.dart';
@@ -33,7 +34,12 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
     _api.fetchFollowDatas((map) {
       setState(() {
         datas.clear();
-        datas.addAll(map['entity']);
+        var entitys = map['entity'] as List<SearchEntity>;
+        entitys.forEach((entity) {
+          if (entity.type == Constants.Video) {
+            datas.add(entity);
+          }
+        });
         nextPageUrl = map['nextPageUrl'];
       });
     });
@@ -45,7 +51,12 @@ class _CommuntiyFollowPage extends State<CommuntiyFollowPage> {
     }
     _api.fetchMoreFollowDatas(nextPageUrl, (map) {
       setState(() {
-        datas.addAll(map['entity']);
+        var entitys = map['entity'] as List<SearchEntity>;
+        entitys.forEach((entity) {
+          if (entity.type == Constants.Video) {
+            datas.add(entity);
+          }
+        });
         nextPageUrl = map['nextPageUrl'];
       });
     });
