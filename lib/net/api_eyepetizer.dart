@@ -49,8 +49,20 @@ class EyepetizerApi {
     var response = await httpManager.fetchNet(DailyUrl, null, null, null);
     if (response != null) {
       var result = response.result;
-      ContentBeanEntity entity = ContentBeanEntity.fromJson(result);
-      requestCallBack({'entity': entity});
+      ResponseDatas entity = ResponseDatas.fromJson(result);
+      requestCallBack(
+          {'entity': entity.itemList, 'nextPageUrl': entity.nextPageUrl});
+    }
+  }
+
+  void fetchMoreDailyDatas(
+      String nextPageUrl, RequestCallBack requestCallBack) async {
+    var response = await httpManager.fetchNet(nextPageUrl, null, null, null);
+    if (response != null) {
+      var result = response.result;
+      ResponseDatas entity = ResponseDatas.fromJson(result);
+      requestCallBack(
+          {'entity': entity.itemList, 'nextPageUrl': entity.nextPageUrl});
     }
   }
 

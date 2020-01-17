@@ -95,11 +95,6 @@ class _CommuntiyRecommendPage extends State<CommuntiyRecommendPage> {
     );
   }
 
-  /* Container(
-          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-          child:
-        ),*/
-
   Widget _staggeredItemBuilder(ItemlistEntity entity) {
     return Column(
       children: <Widget>[
