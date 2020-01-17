@@ -94,7 +94,7 @@ class EyepetizerApi {
     var response = await httpManager.fetchNet(searchUrl, null, null, null);
     if (response != null) {
       var result = response.result;
-      Datas entity = Datas.fromJson(result);
+      ResponseDatas entity = ResponseDatas.fromJson(result);
       requestCallBack(
           {'entity': entity.itemList, 'nextPageUrl': entity.nextPageUrl});
     }

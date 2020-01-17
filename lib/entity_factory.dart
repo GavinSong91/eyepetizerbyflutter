@@ -1,10 +1,12 @@
 import 'package:eyepetizer/model/banner_ad_entity.dart';
+import 'package:eyepetizer/model/brief_card_entity.dart';
 import 'package:eyepetizer/model/communtiy_recommend_entity.dart';
 import 'package:eyepetizer/model/content_bean_entity.dart';
 import 'package:eyepetizer/model/follow_card_entity.dart';
 import 'package:eyepetizer/model/horizontalcard_data_entity.dart';
 import 'package:eyepetizer/model/itemlist_entity.dart';
 import 'package:eyepetizer/model/search_entity.dart';
+import 'package:eyepetizer/model/search_video_card_entity.dart';
 import 'package:eyepetizer/model/square_collection_entity.dart';
 import 'package:eyepetizer/model/text_card_entity.dart';
 import 'package:eyepetizer/model/thematic_planning_entity.dart';
@@ -18,6 +20,8 @@ class EntityFactory {
       return null;
     } else if (T.toString() == "BannerAdEntity") {
       return BannerAdEntity.fromJson(json) as T;
+    } else if (T.toString() == "BriefCardEntity") {
+      return BriefCardEntity.fromJson(json) as T;
     } else if (T.toString() == "CommuntiyRecommendEntity") {
       return CommuntiyRecommendEntity.fromJson(json) as T;
     } else if (T.toString() == "ContentBeanEntity") {
@@ -30,6 +34,8 @@ class EntityFactory {
       return ItemlistEntity.fromJson(json) as T;
     } else if (T.toString() == "SearchEntity") {
       return SearchEntity.fromJson(json) as T;
+    } else if (T.toString() == "SearchVideoCardEntity") {
+      return SearchVideoCardEntity.fromJson(json) as T;
     } else if (T.toString() == "SquareCollectionEntity") {
       return SquareCollectionEntity.fromJson(json) as T;
     } else if (T.toString() == "TextCardEntity") {

@@ -366,6 +366,12 @@ Widget _generateCollectionItem(SquareCollectionDataItemlist itemList) {
               ),
             ],
           ),
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 5),
+          color: ResColor.grey100,
+          width: double.infinity,
+          height: 1,
         )
       ],
     ),
